@@ -24,9 +24,7 @@ for line in input:
   i = 0
   for l in range(len(line)):
     check += line[l]
-    if check[i] in opens: # check if char is opener
-      i += 1
-    elif check[i] in closes: # check if char is closer
+    if check[i] in closes: # check if char is closer
       symInd = closes.index(check[i]) # symbol index, used to get the corresponding opener symbol
       if check[i-1] == opens[symInd]: # if the previous character is the correct opener, delete the pair
         check = check[:-2]
@@ -35,7 +33,7 @@ for line in input:
         print(f'{check[i-1]} and {check[i]} are not a match! corrupt, breaking loop ')
         corrupters.append(check[i])
         break
-      i += 1
+    i += 1
 
 for c in corrupters:
   if c == ')':
