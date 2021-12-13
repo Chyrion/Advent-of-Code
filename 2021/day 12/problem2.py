@@ -1,3 +1,8 @@
+# quite similar to part 1, but modified to pick out a single small cave that it can visit twice
+# this is a horribly inefficient method for solving the problem, but it ended up working
+# calculating the final sum took about 2 minutes when others do it in <10ms
+# but, this is mine :)
+
 with open('input.txt', 'r') as f:
   _input = f.read().splitlines()
   input = [[x for x in _input[i].split('-')] for i in range(len(_input))] 
