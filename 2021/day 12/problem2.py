@@ -1,4 +1,4 @@
-with open('input_ex.txt', 'r') as f:
+with open('input.txt', 'r') as f:
   _input = f.read().splitlines()
   input = [[x for x in _input[i].split('-')] for i in range(len(_input))] 
 
@@ -27,7 +27,7 @@ def options(block, blocked):
 # creates the possible routes through recursion
 # gets available options from the current cave and goes through each choice and checks viability
 # if it finds a route that ends in an 'end' block, it adds it to the list of combinations
-def router(currRoute, currBlocks, doubled, dubcount, routs):
+def router(currRoute, currBlocks, doubled, routs, combId):
   possibles = options(currRoute[len(currRoute)-1], currBlocks)
   rts = [currRoute]
   routes = routs
@@ -38,7 +38,6 @@ def router(currRoute, currBlocks, doubled, dubcount, routs):
       if 'end' not in rts[a]:
         b = []
         for x in range(1, len(rts[a])):
-          dubs = dubcount
           dubs = rts[a].count(doubled)
           if rts[a][x].islower():
             if rts[a][x] != doubled:
@@ -47,15 +46,10 @@ def router(currRoute, currBlocks, doubled, dubcount, routs):
               if dubs == 2:
                 b.append(rts[a][x])
         #print(f'routing {rts[a]}\nblocks: {b}\ndoubled: {doubled} ({dubs} so far) ')
-        router(rts[a], b, doubled, dubs, routes)
+        router(rts[a], b, doubled, routes, combId)
       else:
-        if rts[a] not in routes:
-          #print(rts[a])
-          routes.append(rts[a])
-  else:
-    for x in range(len(routes)):
-      combinations.append(routes[x])
-    routes.clear()
+        if rts[a] not in combinations[combId]:
+          combinations[combId].append(rts[a])
 
 
         
@@ -65,7 +59,14 @@ def yep():
   for a in range(len(opens)):
     rt = []
     rt = opens[a]
-    router(rt, [], None, 0, [])
+    combinations.append([])
+    for i in range(len(input)):
+      for b in range(len(input[i])):
+        if input[i][b].islower() and input[i][b] != 'end' and input[i][b] != 'start':
+          router(rt, [], input[i][b], [], a)
 
 yep()
-print(len(combinations))
+s = 0
+for x in range(len(combinations)):
+  s += len(combinations[x])
+print(s)
