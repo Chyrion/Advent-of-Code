@@ -6,7 +6,6 @@ My first AoC year is 2021, but I may solve problems from earlier years as well
 
 ### Unsolved (2021):
 
-- Day 3, part 2
 - Day 8, part 2
 - Day 9, part 2
-- Day 11
+- Day 15
