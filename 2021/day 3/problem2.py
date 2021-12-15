@@ -1,44 +1,58 @@
+from collections import Counter, defaultdict
+
 with open('input1.txt', 'r') as f:
-  _in = f.read()
-  bits = _in.splitlines()
-  f.close()
+  bits = f.read().splitlines()
 
 def binToDec(b):
-  p, t = 1, 0
-  for f in range(len(b)):
-    if b[f] == 1:
-      t = t + p
-    p = p * 2
+  t = 0
+  bl = list(reversed(list(b)))
+  for i in range(len(bl)):
+    t += int(bl[i])*(2**i)
   return t
 
-zeros, ones, comp, l0, l1, ox, co = [], [], [], [], [], [], []
-
-for i in range(0, 12):
-  zeros.append(0), ones.append(0), ox.append(0), co.append(0)
-
-for bin in bits:
-  nums = [char for char in bin]
-  for i, n in enumerate(nums):
-    if n == '0':
-      zeros[i] = zeros[i] + 1
-    else:
-      ones[i] = ones[i] + 1
-  comp.append(nums)
-
-for i in range(len(comp)):
-  zero, one = False, False
-  for x in range(len(comp[i])):
-    zero, one = False, False
-    if ones[i] == zeros[i] or ones[i] > zeros[i]:
-      one = True
-    else:
-      zero = True
-    if one:
-      if comp[i][x]
+oxygen, co2 = defaultdict(str), defaultdict(str)
+for i in range(len(bits)):
+  oxygen[i], co2[i] = bits[i], bits[i]
 
 
-defbits = []
-print(comp[0][1])
+# oxygen:
+for i in range(len(bits[0])):
+  if len(oxygen) == 1:
+    break
+  else:
+    CN = Counter()
+    for bin in oxygen:
+      CN.update(oxygen[bin][i])
+    common = 0
+    if CN['1'] >= CN['0']:
+     common = 1
+    temp = defaultdict(str)
+    for key, bin in oxygen.items():
+      if bin[i] == str(common):
+        temp[key] = bin
+    oxygen = temp
 
+# co2
+for i in range(len(bits[0])):
+  if len(co2) == 1:
+    break
+  else:
+    CN = Counter()
+    for bin in co2:
+      CN.update(co2[bin][i])
+    common = 0
+    if CN['1'] >= CN['0']:
+     common = 1
+    temp = defaultdict(str)
+    for key, bin in co2.items():
+      if bin[i] != str(common):
+        temp[key] = bin
+    co2 = temp
 
-# print(f'defbits: {defbits}')
+o, c = 0, 0
+for val in oxygen.values():
+  o = binToDec(val)
+
+for val in co2.values():
+  c = binToDec(val)
+print(o*c)
