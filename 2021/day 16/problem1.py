@@ -2,11 +2,6 @@ from collections import defaultdict
 
 input = open('input.txt', 'r').read()
 
-
-#input = '38006F45291200'
-#input = 'D2FE28'
-#input = 'EE00D40C823060'
-
 ver_tot = 0
 base_str = ''
 hex_to_bin = dict({
