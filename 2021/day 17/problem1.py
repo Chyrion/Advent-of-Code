@@ -27,7 +27,7 @@ def step(inx, iny):
       ymax = maxy
 
 for x in range(300): 
-  for y in range(-100, 85):
+  for y in range(-100, 100):
     step(x, y)
 
 print(f'part 1: {ymax}')
